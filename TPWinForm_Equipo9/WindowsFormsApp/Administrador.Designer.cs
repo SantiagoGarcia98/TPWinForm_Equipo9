@@ -86,6 +86,7 @@
             this.Name = "Administracion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administracion";
+            this.Load += new System.EventHandler(this.Administracion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -12,9 +12,19 @@ namespace WindowsFormsApp
 {
     public partial class Administracion : Form
     {
-        public Administracion()
+        string nombre_usuario;
+        public Administracion(string nombre)
         {
             InitializeComponent();
+            nombre_usuario= nombre;
         }
+
+        private void Administracion_Load(object sender, EventArgs e)
+        {
+            lblSaludo.Text += nombre_usuario;
+        }
+
+       
+        
     }
 }

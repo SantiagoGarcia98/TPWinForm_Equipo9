@@ -60,6 +60,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(271, 20);
             this.txtNombre.TabIndex = 2;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // btnIngresoNombre
             // 
@@ -70,6 +71,7 @@
             this.btnIngresoNombre.TabIndex = 3;
             this.btnIngresoNombre.Text = "Ingresar";
             this.btnIngresoNombre.UseVisualStyleBackColor = true;
+            this.btnIngresoNombre.Click += new System.EventHandler(this.btnIngresoNombre_Click);
             // 
             // btnSalir
             // 
@@ -95,6 +97,7 @@
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";
+            this.Load += new System.EventHandler(this.MenuPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +110,7 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnIngresoNombre;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
 
