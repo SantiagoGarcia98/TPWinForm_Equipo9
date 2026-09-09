@@ -28,13 +28,6 @@ namespace WindowsFormsApp
         {
             btnIngresoNombre.Enabled = false;
         }
-        
-
-        private void btnIngresoNombre_Click(object sender, EventArgs e)
-        {
-            using (Administracion administracion = new Administracion(txtNombre.Text))
-                administracion.ShowDialog();
-        }
         private void controlbotones()
         {
             if (txtNombre.Text.Trim() != string.Empty && txtNombre.Text.All(Char.IsLetter))
@@ -60,6 +53,12 @@ namespace WindowsFormsApp
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
             controlbotones();
+        }
+
+        private void btnIngresoNombre_Click(object sender, EventArgs e)
+        {
+            using (Administracion administracion = new Administracion(txtNombre.Text))
+                administracion.ShowDialog();
         }
     }
 }
