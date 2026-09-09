@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp
 {
-    public partial class MenuPrincipal : Form
+    public partial class Administracion : Form
     {
-        public MenuPrincipal()
+        public Administracion()
         {
             InitializeComponent();
-        }
-
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
