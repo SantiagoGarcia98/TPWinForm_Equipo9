@@ -19,5 +19,6 @@ namespace dominio
         public Marca NombreMarca { get; set; }
         [DisplayName("Categoria")]
         public Categoria TipoCategoria { get; set; }
+        public List<Imagen> urlImagen {  get; set; }    
     }
 }

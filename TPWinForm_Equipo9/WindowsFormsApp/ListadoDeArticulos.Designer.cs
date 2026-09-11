@@ -37,21 +37,24 @@
             this.txtFilterArticulo = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
             this.CmbFiltroArticulo = new System.Windows.Forms.ComboBox();
+            this.ptbImagen = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbImagen)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvArticulos
             // 
             this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvArticulos.Location = new System.Drawing.Point(97, 25);
+            this.dgvArticulos.Location = new System.Drawing.Point(75, 25);
             this.dgvArticulos.Name = "dgvArticulos";
             this.dgvArticulos.Size = new System.Drawing.Size(594, 150);
             this.dgvArticulos.TabIndex = 0;
+            this.dgvArticulos.SelectionChanged += new System.EventHandler(this.dgvArticulos_SelectionChanged);
             // 
             // btnVolver
             // 
             this.btnVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVolver.Location = new System.Drawing.Point(695, 409);
+            this.btnVolver.Location = new System.Drawing.Point(885, 409);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(93, 23);
             this.btnVolver.TabIndex = 1;
@@ -62,7 +65,7 @@
             // btnDetalle
             // 
             this.btnDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDetalle.Location = new System.Drawing.Point(67, 410);
+            this.btnDetalle.Location = new System.Drawing.Point(162, 410);
             this.btnDetalle.Name = "btnDetalle";
             this.btnDetalle.Size = new System.Drawing.Size(129, 23);
             this.btnDetalle.TabIndex = 2;
@@ -72,7 +75,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(267, 409);
+            this.btnEliminar.Location = new System.Drawing.Point(362, 409);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(137, 23);
             this.btnEliminar.TabIndex = 3;
@@ -82,7 +85,7 @@
             // btnModificar
             // 
             this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(493, 409);
+            this.btnModificar.Location = new System.Drawing.Point(588, 409);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(140, 23);
             this.btnModificar.TabIndex = 4;
@@ -128,11 +131,21 @@
             this.CmbFiltroArticulo.Size = new System.Drawing.Size(121, 21);
             this.CmbFiltroArticulo.TabIndex = 8;
             // 
+            // ptbImagen
+            // 
+            this.ptbImagen.Location = new System.Drawing.Point(753, 25);
+            this.ptbImagen.Name = "ptbImagen";
+            this.ptbImagen.Size = new System.Drawing.Size(184, 150);
+            this.ptbImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.ptbImagen.TabIndex = 9;
+            this.ptbImagen.TabStop = false;
+            // 
             // ListadoDeArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(995, 450);
+            this.Controls.Add(this.ptbImagen);
             this.Controls.Add(this.CmbFiltroArticulo);
             this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.txtFilterArticulo);
@@ -147,6 +160,7 @@
             this.Text = "Listado de articulos";
             this.Load += new System.EventHandler(this.ListadoDeArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbImagen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +177,6 @@
         private System.Windows.Forms.TextBox txtFilterArticulo;
         private System.Windows.Forms.Label lblFiltro;
         private System.Windows.Forms.ComboBox CmbFiltroArticulo;
+        private System.Windows.Forms.PictureBox ptbImagen;
     }
 }

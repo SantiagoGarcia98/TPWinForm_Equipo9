@@ -14,6 +14,8 @@ namespace WindowsFormsApp
     public partial class ListadoDeArticulos : Form
     {
         private List<Articulo> listaArticulos;
+        private int indice = 0;
+        private Articulo seleccion;
 
         public ListadoDeArticulos()
         {
@@ -22,7 +24,7 @@ namespace WindowsFormsApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void ListadoDeArticulos_Load(object sender, EventArgs e)
@@ -82,5 +84,34 @@ namespace WindowsFormsApp
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = filtrada;
         }
+        
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            indice = 0;
+            if (dgvArticulos.CurrentRow != null)
+                seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            if(seleccion.urlImagen != null)
+            {
+                CargarImagen(seleccion.urlImagen);
+            }
+            else
+            {
+                ptbImagen.Load("https://media.istockphoto.com/id/827247322/es/vector/se%C3%B1al-de-peligro-vector-icono-ilustraci%C3%B3n-de-atenci%C3%B3n-atenci%C3%B3n-negocio-concepto-simple-plana.jpg?s=612x612&w=0&k=20&c=iEXTniBp9NMjwYdYvsAuaV6NyvMHAmOtTlfXT5ipR-w=");
+            }
+        }
+        public void CargarImagen(List<Imagen> imagenes)
+        {
+            try
+            {
+                ptbImagen.Load(imagenes[indice].Url);
+            }
+            catch (Exception)
+            {
+                ptbImagen.Load("https://media.istockphoto.com/id/827247322/es/vector/se%C3%B1al-de-peligro-vector-icono-ilustraci%C3%B3n-de-atenci%C3%B3n-atenci%C3%B3n-negocio-concepto-simple-plana.jpg?s=612x612&w=0&k=20&c=iEXTniBp9NMjwYdYvsAuaV6NyvMHAmOtTlfXT5ipR-w=");
+
+                throw;
+            }
+            
+        } 
     }
 }

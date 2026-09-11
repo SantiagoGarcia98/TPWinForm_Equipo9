@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataArticulo.cs" />
     <Compile Include="ListadoDeArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +101,10 @@
     <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{d8230234-eda5-4e9e-94c8-ea58e424a7f6}</Project>
       <Name>dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{db77a74d-99c3-4429-b801-d63ffe0ab94f}</Project>
+      <Name>negocio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

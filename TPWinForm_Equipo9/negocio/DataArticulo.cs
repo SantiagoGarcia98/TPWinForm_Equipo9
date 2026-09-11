@@ -1,14 +1,15 @@
-﻿using dominio;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using dominio;
+using negocio;
 
 namespace WindowsFormsApp
 {
-    class DataArticulo
+    public class DataArticulo
     {
         public List<Articulo> ListarArticulo()
         {
@@ -17,7 +18,7 @@ namespace WindowsFormsApp
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
 
-            try 
+            try
             {
                 conexion.ConnectionString = "server = localhost\\SQLEXPRESS; database = CATALOGO_P3_DB; integrated security = true; ";
                 comando.CommandType = System.Data.CommandType.Text;
@@ -52,17 +53,63 @@ namespace WindowsFormsApp
 
                     aux.Precio = (decimal)lector["precio"];
 
-                    list.Add(aux); 
-                }
+                    list.Add(aux);
 
-                conexion.Close();
+                    List<Imagen> imagenes;
+                    imagenes = obtenerImagen(aux.id);
+                    if (imagenes.Count > 0)
+                    {
+                        aux.urlImagen = imagenes;
+                        list.Add(aux);
+                         
+                    }
+                }
+              
+                
                 return list;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
+            finally
+            {
+                conexion.Close();
+            }
 
+
+            }
+        public List<Imagen>obtenerImagen(int id)
+        {
+            List<Imagen> listadoImagen = new List<Imagen>();
+            AccesoSQL datos = new AccesoSQL();
+            datos.setConsulta("select i.id, i.imagenUrl, a.Id articulo from imagenes i, articulos a where a.Id = i.IdArticulo");
+            try
+            {
+                datos.ConsultaBD();
+                while (datos.Lector.Read())
+                {
+                    int articulos = (int)datos.Lector["articulo"];
+                    if (articulos == id)
+                    {
+                        Imagen imagen = new Imagen();
+                        imagen.Id = (int)datos.Lector["id"];
+                        imagen.IdArticulo = articulos;
+                        imagen.Url = (string)datos.Lector["imagenurl"];
+                        listadoImagen.Add(imagen);
+                    }
+                }
+                return listadoImagen;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
