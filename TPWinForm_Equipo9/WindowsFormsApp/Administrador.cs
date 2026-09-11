@@ -28,5 +28,11 @@ namespace WindowsFormsApp
         {
             this.Close();
         }
+
+        private void btnListadoArticulo_Click(object sender, EventArgs e)
+        {
+            ListadoDeArticulos ventanaList = new ListadoDeArticulos();
+            ventanaList.Show();
+        }
     }
 }

@@ -21,5 +21,12 @@ namespace WindowsFormsApp
         {
 
         }
+
+        private void ListadoDeArticulos_Load(object sender, EventArgs e)
+        {
+            DataArticulo dataArt = new DataArticulo();
+            dgvArticulos.DataSource = dataArt.ListarArticulo();
+
+        }
     }
 }

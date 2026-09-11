@@ -53,6 +53,7 @@
             this.btnListadoArticulo.TabIndex = 1;
             this.btnListadoArticulo.Text = "Listado de articulos";
             this.btnListadoArticulo.UseVisualStyleBackColor = true;
+            this.btnListadoArticulo.Click += new System.EventHandler(this.btnListadoArticulo_Click);
             // 
             // btnAgregar
             // 

@@ -131,6 +131,7 @@
             this.Name = "ListadoDeArticulos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de articulos";
+            this.Load += new System.EventHandler(this.ListadoDeArticulos_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
