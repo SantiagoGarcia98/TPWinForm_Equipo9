@@ -34,8 +34,9 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtFilterArticulo = new System.Windows.Forms.TextBox();
             this.lblFiltro = new System.Windows.Forms.Label();
+            this.CmbFiltroArticulo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,37 +92,50 @@
             // btnBuscar
             // 
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(386, 207);
+            this.btnBuscar.Location = new System.Drawing.Point(528, 211);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // textBox1
+            // txtFilterArticulo
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 210);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(274, 20);
-            this.textBox1.TabIndex = 6;
+            this.txtFilterArticulo.Location = new System.Drawing.Point(225, 214);
+            this.txtFilterArticulo.Name = "txtFilterArticulo";
+            this.txtFilterArticulo.Size = new System.Drawing.Size(274, 20);
+            this.txtFilterArticulo.TabIndex = 6;
             // 
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
             this.lblFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFiltro.Location = new System.Drawing.Point(45, 211);
+            this.lblFiltro.Location = new System.Drawing.Point(12, 218);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(46, 16);
             this.lblFiltro.TabIndex = 7;
             this.lblFiltro.Text = "Filtro:";
+            // 
+            // CmbFiltroArticulo
+            // 
+            this.CmbFiltroArticulo.BackColor = System.Drawing.Color.White;
+            this.CmbFiltroArticulo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.CmbFiltroArticulo.FormattingEnabled = true;
+            this.CmbFiltroArticulo.Location = new System.Drawing.Point(75, 213);
+            this.CmbFiltroArticulo.Name = "CmbFiltroArticulo";
+            this.CmbFiltroArticulo.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.CmbFiltroArticulo.Size = new System.Drawing.Size(121, 21);
+            this.CmbFiltroArticulo.TabIndex = 8;
             // 
             // ListadoDeArticulos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CmbFiltroArticulo);
             this.Controls.Add(this.lblFiltro);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtFilterArticulo);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnEliminar);
@@ -146,7 +160,8 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtFilterArticulo;
         private System.Windows.Forms.Label lblFiltro;
+        private System.Windows.Forms.ComboBox CmbFiltroArticulo;
     }
 }
