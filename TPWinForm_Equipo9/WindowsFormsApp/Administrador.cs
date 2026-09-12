@@ -34,5 +34,11 @@ namespace WindowsFormsApp
             ListadoDeArticulos ventanaList = new ListadoDeArticulos();
             ventanaList.Show();
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            AgregarArticulo ventanaAgregar = new AgregarArticulo();
+            ventanaAgregar.Show();
+        }
     }
 }
