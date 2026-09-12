@@ -106,6 +106,13 @@ namespace WindowsFormsApp
  
             }
             
-        } 
+        }
+
+        private void btnDetalle_Click(object sender, EventArgs e)
+        {
+            Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            DetalleArticulo detalle = new DetalleArticulo(seleccion);
+            detalle.ShowDialog();
+        }
     }
 }
