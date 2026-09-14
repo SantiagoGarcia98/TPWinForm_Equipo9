@@ -20,6 +20,9 @@ namespace WindowsFormsApp
 
             try
             {
+
+                
+
                 conexion.ConnectionString = "server = localhost\\SQLEXPRESS; database = CATALOGO_P3_DB; integrated security = true; ";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = ("select A.id, A.codigo,A.nombre, A.descripcion, A.idMarca,M.Descripcion as marca, A.idcategoria,C.Descripcion as categoria,A.precio from articulos A Left join Marcas M on a.idmarca=m.id left join categorias c on a.idcategoria = c.id");
@@ -53,16 +56,16 @@ namespace WindowsFormsApp
 
                     aux.Precio = (decimal)lector["precio"];
 
-                    list.Add(aux);
+                    
 
-                    List<Imagen> imagenes;
-                    imagenes = obtenerImagen(aux.id);
+                    List<Imagen> imagenes = obtenerImagen(aux.id);
                     if (imagenes.Count > 0)
                     {
                         aux.urlImagen = imagenes;
-                        list.Add(aux);
+                        
                          
                     }
+                    list.Add(aux);
                 }
               
                 

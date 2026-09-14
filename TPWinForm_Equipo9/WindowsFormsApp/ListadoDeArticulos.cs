@@ -32,12 +32,13 @@ namespace WindowsFormsApp
             DataArticulo dataArt = new DataArticulo();
             listaArticulos = dataArt.ListarArticulo();
             dgvArticulos.DataSource = listaArticulos;
+            dgvArticulos.Columns["id"].Visible = false;
+            dgvArticulos.Columns["descripcion"].Visible = false;
             CargarImagen(listaArticulos[indice].urlImagen);
 
-            CmbFiltroArticulo.Items.Add("ID");
+
             CmbFiltroArticulo.Items.Add("CODIGO");
             CmbFiltroArticulo.Items.Add("NOMBRE");
-            CmbFiltroArticulo.Items.Add("DESCRIPCION");
             CmbFiltroArticulo.Items.Add("MARCA");
             CmbFiltroArticulo.Items.Add("CATEGORIA");
             CmbFiltroArticulo.Items.Add("PRECIO");
@@ -63,10 +64,6 @@ namespace WindowsFormsApp
             {
                 filtrada = listaArticulos.FindAll(x => x.Nombre.ToUpper().Contains(texto));
             }
-            else if (campo == "DESCRIPCION")
-            {
-                filtrada = listaArticulos.FindAll(x => x.Descripcion.ToUpper().Contains(texto));
-            }
             else if (campo == "MARCA")
             {
                 filtrada = listaArticulos.FindAll(x => x.NombreMarca.descripcion.ToUpper().Contains(texto));
@@ -88,6 +85,10 @@ namespace WindowsFormsApp
         
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgvArticulos.CurrentRow == null) 
+            {
+                return;
+            }
             indice = 0;
             
             Articulo  seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
@@ -98,14 +99,34 @@ namespace WindowsFormsApp
         {
             try
             {
+                if (imagenes == null || imagenes.Count == 0)
+                {
+                    ImgNull();
+                    return;
+                }
+
+                if (indice < 0 || indice >= imagenes.Count)
+                    indice = 0;
+
                 ptbImagen.Load(imagenes[indice].Url);
             }
             catch (Exception)
             {
-                ptbImagen.Load("https://media.istockphoto.com/id/827247322/es/vector/se%C3%B1al-de-peligro-vector-icono-ilustraci%C3%B3n-de-atenci%C3%B3n-atenci%C3%B3n-negocio-concepto-simple-plana.jpg?s=612x612&w=0&k=20&c=iEXTniBp9NMjwYdYvsAuaV6NyvMHAmOtTlfXT5ipR-w=");
- 
+                ImgNull();
             }
-            
+
+        }
+
+        private void ImgNull()
+        {
+            try
+            {
+                ptbImagen.Load("https://media.istockphoto.com/id/827247322/es/vector/se%C3%B1al-de-peligro-vector-icono-ilustraci%C3%B3n-de-atenci%C3%B3n-atenci%C3%B3n-negocio-concepto-simple-plana.jpg?s=612x612&w=0&k=20&c=iEXTniBp9NMjwYdYvsAuaV6NyvMHAmOtTlfXT5ipR-w=");
+            }
+            catch (Exception)
+            {
+                ptbImagen.Image = null;
+            }
         }
 
         private void btnDetalle_Click(object sender, EventArgs e)
