@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
+using negocio;
 
 namespace WindowsFormsApp
 {
@@ -81,6 +82,8 @@ namespace WindowsFormsApp
             }
             dgvArticulos.DataSource = null;
             dgvArticulos.DataSource = filtrada;
+            dgvArticulos.Columns["id"].Visible = false;
+            dgvArticulos.Columns["descripcion"].Visible = false;
         }
         
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
@@ -134,6 +137,56 @@ namespace WindowsFormsApp
             Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             DetalleArticulo detalle = new DetalleArticulo(seleccion);
             detalle.ShowDialog();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            AccesoSQL access = new AccesoSQL();
+            
+
+            try {
+                access.setConsulta("delete from articulos where id=" + seleccion.id);
+                access.ConsultaBD();
+                
+            }
+            catch (Exception ex )
+            {
+                throw ex;
+            }
+            finally
+            {
+                DataArticulo dataArt = new DataArticulo();
+                listaArticulos = dataArt.ListarArticulo();
+                dgvArticulos.DataSource = listaArticulos;
+
+                access.cerrarConexion();
+            }
+
+        }
+
+    
+
+        private void dgvArticulos_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            AccesoSQL access = new AccesoSQL();
+            try
+            {
+                access.setConsulta("update articulos set "+ dgvArticulos.Columns[e.ColumnIndex].Name + " = '" + dgvArticulos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() + "' where id = " + ((Articulo)dgvArticulos.Rows[e.RowIndex].DataBoundItem).id);
+                access.ConsultaBD();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DataArticulo dataArt = new DataArticulo();
+                listaArticulos = dataArt.ListarArticulo();
+                dgvArticulos.DataSource = listaArticulos;
+
+                access.cerrarConexion();
+            }
         }
     }
 }
