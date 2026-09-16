@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AccesoSQL.cs" />
     <Compile Include="DataArticulo.cs" />
+    <Compile Include="DataCategoria.cs" />
+    <Compile Include="DataMarca.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
