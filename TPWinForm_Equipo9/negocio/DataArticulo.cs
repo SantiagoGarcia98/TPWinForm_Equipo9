@@ -114,5 +114,42 @@ namespace WindowsFormsApp
                 datos.cerrarConexion();
             }
         }
+
+        public void ModificarArticulo(Articulo articulo)
+        {
+            AccesoSQL datos = new AccesoSQL();
+
+            try
+            {
+                datos.setConsulta(
+                    "UPDATE ARTICULOS " +
+                    "SET Codigo = @codigo, " +
+                    "Nombre = @nombre, " +
+                    "Descripcion = @descripcion, " +
+                    "IdMarca = @idMarca, " +
+                    "IdCategoria = @idCategoria, " +
+                    "Precio = @precio " +
+                    "WHERE Id = @id"
+                );
+
+                datos.setParametro("@codigo", articulo.Codigo);
+                datos.setParametro("@nombre", articulo.Nombre);
+                datos.setParametro("@descripcion", articulo.Descripcion);
+                datos.setParametro("@idMarca", articulo.NombreMarca.Id);
+                datos.setParametro("@idCategoria", articulo.TipoCategoria.Id);
+                datos.setParametro("@precio", articulo.Precio);
+                datos.setParametro("@id", articulo.id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

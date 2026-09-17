@@ -1,4 +1,5 @@
 ﻿using negocio;
+using dominio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +15,43 @@ namespace WindowsFormsApp
 {
     public partial class AgregarArticulo : Form
     {
+
+        private Articulo articulo;
         public AgregarArticulo()
         {
             InitializeComponent();
         }
 
+        public AgregarArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+
+            btnAgregar.Text = "Modificar Articulo";
+            textBox1.Text = articulo.Nombre;
+            textBox3.Text = articulo.Codigo;
+            textBox4.Text = articulo.Precio.ToString();
+            textBox6.Text = articulo.Descripcion;
+
+
+        }
         private void AgregarArticulo_Load(object sender, EventArgs e)
         {
           DataMarca listadoMarca = new DataMarca();
           DataCategoria listadoCategoria = new DataCategoria();
             try
             {
-                cmbMarca.DataSource = listadoMarca.listar();
-                cmdCategoria.DataSource = listadoCategoria.listar();           
+                List<Marca> marcas = listadoMarca.listar();
+                List<Categoria> categorias = listadoCategoria.listar();
+
+                cmbMarca.DataSource = marcas;
+                cmdCategoria.DataSource = categorias;
+
+                if (articulo != null)
+                {
+                    cmbMarca.SelectedItem = marcas.Find(x => x.Id == articulo.NombreMarca.Id);
+                    cmdCategoria.SelectedItem = categorias.Find(x => x.Id == articulo.TipoCategoria.Id);
+                }
             }
             catch (Exception ex)
             {
@@ -35,6 +60,33 @@ namespace WindowsFormsApp
             }
 
 
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (articulo != null)
+                {
+                    articulo.Nombre = textBox1.Text;
+                    articulo.Codigo = textBox3.Text;
+                    articulo.Precio = decimal.Parse(textBox4.Text);
+                    articulo.Descripcion = textBox6.Text;
+
+                    articulo.NombreMarca = (Marca)cmbMarca.SelectedItem;
+                    articulo.TipoCategoria = (Categoria)cmdCategoria.SelectedItem;
+
+                    DataArticulo datos = new DataArticulo();
+                    datos.ModificarArticulo(articulo);
+
+                    MessageBox.Show("Artículo modificado correctamente.");
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

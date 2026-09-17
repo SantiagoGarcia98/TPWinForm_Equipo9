@@ -188,5 +188,12 @@ namespace WindowsFormsApp
                 access.cerrarConexion();
             }
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            AgregarArticulo modificar = new AgregarArticulo(seleccion);
+            modificar.ShowDialog();
+        }
     }
 }
