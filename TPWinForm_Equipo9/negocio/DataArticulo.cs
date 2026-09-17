@@ -151,5 +151,20 @@ namespace WindowsFormsApp
                 datos.cerrarConexion();
             }
         }
+
+        public void AgregarArticulo(Articulo articulo)
+        {
+            AccesoSQL datos = new AccesoSQL();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

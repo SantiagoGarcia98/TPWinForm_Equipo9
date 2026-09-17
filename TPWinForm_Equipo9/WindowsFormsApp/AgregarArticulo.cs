@@ -17,6 +17,7 @@ namespace WindowsFormsApp
     {
 
         private Articulo articulo;
+        List<Imagen> imagenes = new List<Imagen>();    
         public AgregarArticulo()
         {
             InitializeComponent();
@@ -28,10 +29,10 @@ namespace WindowsFormsApp
             this.articulo = articulo;
 
             btnAgregar.Text = "Modificar Articulo";
-            textBox1.Text = articulo.Nombre;
-            textBox3.Text = articulo.Codigo;
-            textBox4.Text = articulo.Precio.ToString();
-            textBox6.Text = articulo.Descripcion;
+            txtNombre.Text = articulo.Nombre;
+            txtCodigo.Text = articulo.Codigo;
+            txtPrecio.Text = articulo.Precio.ToString();
+            txtDescripcion.Text = articulo.Descripcion;
 
 
         }
@@ -45,12 +46,12 @@ namespace WindowsFormsApp
                 List<Categoria> categorias = listadoCategoria.listar();
 
                 cmbMarca.DataSource = marcas;
-                cmdCategoria.DataSource = categorias;
+                cmbCategoria.DataSource = categorias;
 
                 if (articulo != null)
                 {
                     cmbMarca.SelectedItem = marcas.Find(x => x.Id == articulo.NombreMarca.Id);
-                    cmdCategoria.SelectedItem = categorias.Find(x => x.Id == articulo.TipoCategoria.Id);
+                    cmbCategoria.SelectedItem = categorias.Find(x => x.Id == articulo.TipoCategoria.Id);
                 }
             }
             catch (Exception ex)
@@ -64,10 +65,12 @@ namespace WindowsFormsApp
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(textBox1.Text) ||
-                string.IsNullOrWhiteSpace(textBox3.Text) ||
-                string.IsNullOrWhiteSpace(textBox4.Text) ||
-                string.IsNullOrWhiteSpace(textBox6.Text))
+            DataArticulo aux = new DataArticulo();
+
+            if(string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtCodigo.Text) ||
+                string.IsNullOrWhiteSpace(txtPrecio.Text) ||
+                string.IsNullOrWhiteSpace(txtDescripcion.Text))
 
             {
                 MessageBox.Show("Todos los campos son obligatorios.");
@@ -77,7 +80,7 @@ namespace WindowsFormsApp
 
             decimal precio;
 
-            if(!decimal.TryParse(textBox4.Text, out precio) || precio <=0)
+            if(!decimal.TryParse(txtPrecio.Text, out precio) || precio <=0)
             {
                 MessageBox.Show("El precio debe ser un numero valido mayor a 0.");
                 return;
@@ -86,13 +89,13 @@ namespace WindowsFormsApp
             {
                 if (articulo != null)
                 {
-                    articulo.Nombre = textBox1.Text;
-                    articulo.Codigo = textBox3.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.Codigo = txtCodigo.Text;
                     articulo.Precio = precio;
-                    articulo.Descripcion = textBox6.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
 
                     articulo.NombreMarca = (Marca)cmbMarca.SelectedItem;
-                    articulo.TipoCategoria = (Categoria)cmdCategoria.SelectedItem;
+                    articulo.TipoCategoria = (Categoria)cmbCategoria.SelectedItem;
 
                     DataArticulo datos = new DataArticulo();
                     datos.ModificarArticulo(articulo);
@@ -105,6 +108,92 @@ namespace WindowsFormsApp
             {
                 MessageBox.Show(ex.ToString());
             }
+
+
+            try
+            {
+                if (!ValidarDatos())
+                {
+                    articulo = new Articulo();
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.NombreMarca =(Marca)cmbMarca.SelectedItem;
+                    articulo.TipoCategoria = (Categoria)cmbCategoria.SelectedItem;
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    articulo.Codigo = txtCodigo.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.urlImagen = imagenes;
+                   
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnImagenAgregar_Click(object sender, EventArgs e)
+        {
+            Imagen imagen = new Imagen();
+            try
+            {
+                imagen.Url = txtImagen.Text;
+                if (!(string.IsNullOrEmpty(txtImagen.Text)))
+                {
+                    imagenes.Add(imagen);
+                    txtImagen.Text =string.Empty;
+                    MessageBox.Show("Imagen agregada al articulo");
+                }
+                else
+                {
+                    MessageBox.Show("Por favor complete con una URL y luego presione el boton");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool ValidarDatos()
+        {
+            if (cmbCategoria.SelectedIndex < 0)
+            {
+                return true;
+            }
+            if (cmbMarca.SelectedIndex <0)
+            {
+                return true;
+            }
+            if (string.IsNullOrEmpty(txtCodigo.Text) || string.IsNullOrEmpty(txtNombre.Text))
+            {
+                return true;
+            }
+            if (string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtDescripcion.Text))
+            {
+                return true;
+            }
+            if (string.IsNullOrEmpty(txtPrecio.Text))
+            {
+                return true;
+            }
+            if (!verificarNumeros())
+            {
+                return true;
+            }
+
+            return false;
+        }
+        private bool verificarNumeros()
+        {
+            foreach (char c in txtPrecio.Text)
+            {
+                if (!(Char.IsNumber(c)))
+                    return false;
+            }
+            return true;
         }
     }
 }
