@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using dominio;
 using negocio;
+using System.Runtime.CompilerServices;
 
 namespace WindowsFormsApp
 {
@@ -157,14 +158,106 @@ namespace WindowsFormsApp
             AccesoSQL datos = new AccesoSQL();
             try
             {
-
+                ObtenerMarcayCategoria(articulo);
+                datos.setConsulta("insert into articulos (Codigo,Nombre,Descripcion,IdMarca,IdCategoria,Precio) values(@Codigo,@Nombre,@Descripcion,@IdMarca,@IdCategoria,@Precio)");
+                datos.setParametro("@codigo", articulo.Codigo);
+                datos.setParametro("@nombre", articulo.Nombre);
+                datos.setParametro("@descripcion", articulo.Descripcion);
+                datos.setParametro("@idMarca", articulo.NombreMarca.Id);
+                datos.setParametro("@idCategoria", articulo.TipoCategoria.Id);
+                datos.setParametro("@precio", articulo.Precio);
+                datos.setParametro("@id", articulo.id);
+                datos.ejecutarAccion();
+                AgregarImagen(articulo.urlImagen);                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
+
+        private void ObtenerMarcayCategoria(Articulo nuevo)
+        {
+            AccesoSQL datos = new AccesoSQL();
+            datos.setConsulta("select c.id IDCategoria, m.id IDMarca from categorias c, marcas m where m.Descripcion=@nombreMarca and c.Descripcion=@nombreCategoria");
+            datos.setParametro("@nombreMarca", nuevo.NombreMarca.descripcion);
+            datos.setParametro("@nombreCategoria", nuevo.TipoCategoria.descripcion);
+            try
+            {
+                datos.ConsultaBD();
+                if (datos.Lector.Read())
+                {
+                    nuevo.TipoCategoria.Id = (int)datos.Lector["IDCategoria"];
+                    nuevo.NombreMarca.Id = (int)datos.Lector["IDMarca"];
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        private void AgregarImagen(List<Imagen> imagenes)
+        {
+            int id = UltimoArticulo();
+            foreach (Imagen aux in imagenes)
+            {
+                AccesoSQL datos = new AccesoSQL();
+                datos.setConsulta("insert into imagenes (IdArticulo,ImagenUrl) values(@idArticulo,@UrlImagen)");
+                datos.setParametro("@idArticulo", id);
+                datos.setParametro("@UrlImagen", aux.Url);
+                try
+                {
+                    datos.ejecutarAccion();
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                finally 
+                {
+                    datos.cerrarConexion(); 
+                }
+
+            }
+        }
+        private int UltimoArticulo()
+        {
+            AccesoSQL datos = new AccesoSQL();
+            datos.setConsulta("select id from articulos");
+            int id = 0;
+            try
+            {
+                datos.ConsultaBD();
+                while (datos.Lector.Read()) 
+                {
+                    id = (int)datos.Lector["id"];
+                } 
+                return id;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        
+
 
     }
 }

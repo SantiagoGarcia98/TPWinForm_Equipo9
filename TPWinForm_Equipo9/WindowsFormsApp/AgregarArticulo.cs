@@ -122,13 +122,20 @@ namespace WindowsFormsApp
                     articulo.Codigo = txtCodigo.Text;
                     articulo.Descripcion = txtDescripcion.Text;
                     articulo.urlImagen = imagenes;
-                   
+                    aux.AgregarArticulo(articulo);
+                    MessageBox.Show("Agregar exitosamente");
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Faltan datos por ingresar / Estan mal ingresados");
+                    return;
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.ToString());
                 throw;
             }
         }
