@@ -194,6 +194,11 @@ namespace WindowsFormsApp
             Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             AgregarArticulo modificar = new AgregarArticulo(seleccion);
             modificar.ShowDialog();
+
+
+            DataArticulo dataArt = new DataArticulo();
+            listaArticulos = dataArt.ListarArticulo();
+            dgvArticulos.DataSource = listaArticulos;
         }
     }
 }

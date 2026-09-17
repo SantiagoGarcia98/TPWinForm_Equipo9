@@ -57,20 +57,38 @@ namespace WindowsFormsApp
             {
                 MessageBox.Show(ex.ToString());
              
-            }
+            } 
 
 
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrWhiteSpace(textBox1.Text) ||
+                string.IsNullOrWhiteSpace(textBox3.Text) ||
+                string.IsNullOrWhiteSpace(textBox4.Text) ||
+                string.IsNullOrWhiteSpace(textBox6.Text))
+
+            {
+                MessageBox.Show("Todos los campos son obligatorios.");
+                return;
+            }
+
+
+            decimal precio;
+
+            if(!decimal.TryParse(textBox4.Text, out precio) || precio <=0)
+            {
+                MessageBox.Show("El precio debe ser un numero valido mayor a 0.");
+                return;
+            }
             try
             {
                 if (articulo != null)
                 {
                     articulo.Nombre = textBox1.Text;
                     articulo.Codigo = textBox3.Text;
-                    articulo.Precio = decimal.Parse(textBox4.Text);
+                    articulo.Precio = precio;
                     articulo.Descripcion = textBox6.Text;
 
                     articulo.NombreMarca = (Marca)cmbMarca.SelectedItem;
