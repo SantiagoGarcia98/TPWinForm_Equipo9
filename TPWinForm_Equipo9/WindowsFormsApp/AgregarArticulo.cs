@@ -102,6 +102,7 @@ namespace WindowsFormsApp
 
                     MessageBox.Show("Artículo modificado correctamente.");
                     Close();
+                    return;
                 }
             }
             catch (Exception ex)
@@ -170,7 +171,7 @@ namespace WindowsFormsApp
             {
                 return true;
             }
-            if (cmbMarca.SelectedIndex <0)
+            if (cmbMarca.SelectedIndex < 0)
             {
                 return true;
             }
@@ -178,7 +179,7 @@ namespace WindowsFormsApp
             {
                 return true;
             }
-            if (string.IsNullOrEmpty(txtDescripcion.Text) || string.IsNullOrEmpty(txtDescripcion.Text))
+            if (string.IsNullOrEmpty(txtDescripcion.Text))
             {
                 return true;
             }
@@ -186,21 +187,8 @@ namespace WindowsFormsApp
             {
                 return true;
             }
-            if (!verificarNumeros())
-            {
-                return true;
-            }
 
             return false;
-        }
-        private bool verificarNumeros()
-        {
-            foreach (char c in txtPrecio.Text)
-            {
-                if (!(Char.IsNumber(c)))
-                    return false;
-            }
-            return true;
         }
     }
 }
