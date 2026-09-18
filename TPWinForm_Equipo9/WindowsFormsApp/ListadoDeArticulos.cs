@@ -142,7 +142,22 @@ namespace WindowsFormsApp
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             Articulo seleccion = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+
+            DialogResult respuesta = MessageBox.Show(
+                "¿Está seguro que desea eliminar el artículo " + seleccion.Nombre + "?", "Confirmar eliminacion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+                );
+
+            if(respuesta != DialogResult.Yes)
+            {
+                return;
+            }
+
+
             AccesoSQL access = new AccesoSQL();
+
             
 
             try {
