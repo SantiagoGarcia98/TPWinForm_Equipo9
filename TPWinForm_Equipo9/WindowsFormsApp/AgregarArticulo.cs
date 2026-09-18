@@ -190,5 +190,10 @@ namespace WindowsFormsApp
 
             return false;
         }
+
+        private void btnVolverAgregarArticulo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

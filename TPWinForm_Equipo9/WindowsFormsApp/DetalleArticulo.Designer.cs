@@ -41,6 +41,7 @@ namespace WindowsFormsApp
             this.lblDatoMarca = new System.Windows.Forms.Label();
             this.lblDatoCategoria = new System.Windows.Forms.Label();
             this.lblDatoDescripcion = new System.Windows.Forms.Label();
+            this.btnVolverDetalleArticulo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -163,11 +164,22 @@ namespace WindowsFormsApp
             this.lblDatoDescripcion.TabIndex = 11;
             this.lblDatoDescripcion.Text = "label6";
             // 
+            // btnVolverDetalleArticulo
+            // 
+            this.btnVolverDetalleArticulo.Location = new System.Drawing.Point(488, 306);
+            this.btnVolverDetalleArticulo.Name = "btnVolverDetalleArticulo";
+            this.btnVolverDetalleArticulo.Size = new System.Drawing.Size(75, 23);
+            this.btnVolverDetalleArticulo.TabIndex = 12;
+            this.btnVolverDetalleArticulo.Text = "Volver";
+            this.btnVolverDetalleArticulo.UseVisualStyleBackColor = true;
+            this.btnVolverDetalleArticulo.Click += new System.EventHandler(this.btnVolverDetalleArticulo_Click);
+            // 
             // DetalleArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btnVolverDetalleArticulo);
             this.Controls.Add(this.lblDatoDescripcion);
             this.Controls.Add(this.lblDatoCategoria);
             this.Controls.Add(this.lblDatoMarca);
@@ -180,7 +192,7 @@ namespace WindowsFormsApp
             this.Controls.Add(this.lblPrecio);
             this.Controls.Add(this.lblCodigo);
             this.Controls.Add(this.lblNombre);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DetalleArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DetalleArticulo";
@@ -203,5 +215,6 @@ namespace WindowsFormsApp
         private System.Windows.Forms.Label lblDatoMarca;
         private System.Windows.Forms.Label lblDatoCategoria;
         private System.Windows.Forms.Label lblDatoDescripcion;
+        private System.Windows.Forms.Button btnVolverDetalleArticulo;
     }
 }

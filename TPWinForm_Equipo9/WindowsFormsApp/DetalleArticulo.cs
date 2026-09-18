@@ -32,5 +32,10 @@ namespace WindowsFormsApp
             lblDatoCategoria.Text = articulo.TipoCategoria.ToString();
             lblDatoDescripcion.Text = articulo.Descripcion;
         }
+
+        private void btnVolverDetalleArticulo_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

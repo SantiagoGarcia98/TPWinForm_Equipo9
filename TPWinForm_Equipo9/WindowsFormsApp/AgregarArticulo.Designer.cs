@@ -45,6 +45,7 @@
             this.txtImagen = new System.Windows.Forms.TextBox();
             this.btnImagenAgregar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnVolverAgregarArticulo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -198,11 +199,23 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Agregue la URL de la imagen a agregar";
             // 
+            // btnVolverAgregarArticulo
+            // 
+            this.btnVolverAgregarArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVolverAgregarArticulo.Location = new System.Drawing.Point(662, 393);
+            this.btnVolverAgregarArticulo.Name = "btnVolverAgregarArticulo";
+            this.btnVolverAgregarArticulo.Size = new System.Drawing.Size(114, 30);
+            this.btnVolverAgregarArticulo.TabIndex = 19;
+            this.btnVolverAgregarArticulo.Text = "Volver";
+            this.btnVolverAgregarArticulo.UseVisualStyleBackColor = true;
+            this.btnVolverAgregarArticulo.Click += new System.EventHandler(this.btnVolverAgregarArticulo_Click);
+            // 
             // AgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnVolverAgregarArticulo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnImagenAgregar);
             this.Controls.Add(this.txtImagen);
@@ -248,5 +261,6 @@
         private System.Windows.Forms.TextBox txtImagen;
         private System.Windows.Forms.Button btnImagenAgregar;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnVolverAgregarArticulo;
     }
 }

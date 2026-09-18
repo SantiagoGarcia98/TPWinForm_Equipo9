@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using negocio;
 
 namespace negocio
 {
@@ -33,6 +35,44 @@ namespace negocio
             {
 
                 throw ex;
+            }
+            
+        }
+
+        public void agregarCategoria(Categoria categoria)
+        {
+
+            AccesoSQL datos = new AccesoSQL();
+            try
+            {
+                datos.setConsulta("insert into categorias (descripcion) values ('" + categoria.descripcion + "')");
+                datos.ConsultaBD();
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion(); 
+            }
+        }
+        public void EliminarCategoria(int id)
+        {
+            AccesoSQL datos = new AccesoSQL();
+            try
+            {
+                datos.setConsulta("DELETE FROM CATEGORIAS WHERE id = " + id);
+                datos.ConsultaBD();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
