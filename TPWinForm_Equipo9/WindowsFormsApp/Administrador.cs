@@ -40,5 +40,11 @@ namespace WindowsFormsApp
             AgregarArticulo ventanaAgregar = new AgregarArticulo();
             ventanaAgregar.Show();
         }
+
+        private void btnAgregarMarca_Click(object sender, EventArgs e)
+        {
+            AgregarMarca agregarMarca = new AgregarMarca();
+            agregarMarca.ShowDialog();
+        }
     }
 }
